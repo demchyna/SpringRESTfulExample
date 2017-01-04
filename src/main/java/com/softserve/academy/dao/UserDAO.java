@@ -22,8 +22,8 @@ public class UserDAO {
         return users.stream().filter(item -> item.getId().equals(id)).findFirst().get();
     }
 
-    public void updateUser(User user) {
-        users.set(users.indexOf(user), user);
+    public void updateUser(User oldUser, User newUser) {
+        users.set(users.indexOf(oldUser), newUser);
     }
 
     public void deleteUser(User user) {

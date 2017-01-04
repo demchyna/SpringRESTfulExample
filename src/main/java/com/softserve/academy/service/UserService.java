@@ -25,12 +25,17 @@ public class UserService {
     }
 
     public void updateUser(Integer id, User newUser) {
-        userDAO.updateUser(newUser);
+        User oldUser = userDAO.getUserById(id);
+        if (oldUser != null) {
+            userDAO.updateUser(oldUser, newUser);
+        }
     }
 
     public void deleteUser(int id) {
         User user = getUserById(id);
-        userDAO.deleteUser(user);
+        if (user != null) {
+            userDAO.deleteUser(user);
+        }
     }
 
     public List<User> getAllUsers() {
