@@ -31,19 +31,19 @@ public class UserService {
         }
     }
 
-//    public void deleteUser(int id) {
-//        User user = getUserById(id);
-//        if (user != null) {
-//            userDAO.deleteUser(user);
-//        }
-//    }
-//
-//    public List<User> getAllUsers() {
-//        List<User> users = userDAO.getAllUsers();
-//        if (!users.isEmpty()) {
-//            return users;
-//        } else {
-//            return null;
-//        }
-//    }
+    public void deleteUser(int id) {
+        User user = getUserById(id);
+        if (user != null) {
+            userDAO.deleteUser(id);
+        }
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = userDAO.getAllUsers();
+        if (!users.isEmpty()) {
+            return users;
+        } else {
+            return null;
+        }
+    }
 }

@@ -1,12 +1,14 @@
 package com.softserve.academy.model;
+
 import java.util.Date;
+import java.sql.Timestamp;
 
 public class User {
 
     private int id;
     private String login;
     private String password;
-    private Date createDate = new Date();
+    private Timestamp createDate = new Timestamp(new Date().getTime());
 
     public int getId() {
         return id;
@@ -32,11 +34,15 @@ public class User {
         this.password = password;
     }
 
-    public Date getCreateDate() {
+    public Timestamp getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
+    }
+
+    public void setCreateDate() {
+        this.createDate = new Timestamp(new Date().getTime());
     }
 }

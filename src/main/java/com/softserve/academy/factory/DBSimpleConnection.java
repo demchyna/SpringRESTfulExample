@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBSimpleConnection {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/springrestful";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/ssacademy";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "1111";
 
