@@ -3,21 +3,17 @@ import java.util.Date;
 
 public class User {
 
-    private Integer id = count++;
+    private int id;
     private String login;
     private String password;
     private Date createDate = new Date();
 
-    private static int count = 0;
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    private void setId(Integer id) {
-        if (id != null) {
-            this.id = id;
-        }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -40,7 +36,7 @@ public class User {
         return createDate;
     }
 
-    public void setCreateDate() {
-        this.createDate = new Date();
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

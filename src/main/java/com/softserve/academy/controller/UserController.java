@@ -31,24 +31,24 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    @ResponseStatus(value = HttpStatus.OK)
-    public User updateUser(@PathVariable int id, @RequestBody User user) {
-        userService.updateUser(id, user);
-        return user;
-    }
-
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable int id) {
-        userService.deleteUser(id);
-    }
-
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    @ResponseBody
-    @ResponseStatus(value = HttpStatus.OK)
-    public List<User> getAllUser() {
-        return userService.getAllUsers();
-    }
+//    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+//    @ResponseBody
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public User updateUser(@PathVariable int id, @RequestBody User user) {
+//        userService.updateUser(id, user);
+//        return user;
+//    }
+//
+//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+//    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+//    public void deleteUser(@PathVariable int id) {
+//        userService.deleteUser(id);
+//    }
+//
+//    @RequestMapping(value = "/all", method = RequestMethod.GET)
+//    @ResponseBody
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public List<User> getAllUser() {
+//        return userService.getAllUsers();
+//    }
 }

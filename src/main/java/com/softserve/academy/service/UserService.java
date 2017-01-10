@@ -24,26 +24,26 @@ public class UserService {
         return userDAO.getUserById(id);
     }
 
-    public void updateUser(Integer id, User newUser) {
+    public void updateUser(int id, User newUser) {
         User oldUser = userDAO.getUserById(id);
         if (oldUser != null) {
-            userDAO.updateUser(oldUser, newUser);
+            userDAO.updateUser(id, newUser);
         }
     }
 
-    public void deleteUser(int id) {
-        User user = getUserById(id);
-        if (user != null) {
-            userDAO.deleteUser(user);
-        }
-    }
-
-    public List<User> getAllUsers() {
-        List<User> users = userDAO.getAllUsers();
-        if (!users.isEmpty()) {
-            return users;
-        } else {
-            return null;
-        }
-    }
+//    public void deleteUser(int id) {
+//        User user = getUserById(id);
+//        if (user != null) {
+//            userDAO.deleteUser(user);
+//        }
+//    }
+//
+//    public List<User> getAllUsers() {
+//        List<User> users = userDAO.getAllUsers();
+//        if (!users.isEmpty()) {
+//            return users;
+//        } else {
+//            return null;
+//        }
+//    }
 }

@@ -1,37 +1,82 @@
 package com.softserve.academy.dao;
 
-import com.fasterxml.jackson.core.JsonParseException;
+import com.softserve.academy.factory.ConnectionFactory;
+import com.softserve.academy.factory.ConnectionType;
 import com.softserve.academy.model.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+import javax.jws.soap.SOAPBinding;
+import java.sql.*;
 
 @Repository
 public class UserDAO {
 
-    List<User> users = new ArrayList<>();
+    Connection connect = ConnectionFactory.getDBConnection(ConnectionType.SIMPLE_CONNECTION);
 
     public void addUser(User user) {
-        users.add(user);
+
+        try {
+            PreparedStatement pstmt = connect.prepareStatement("INSERT INTO user(login, password, createDate) VALUES (?, ?, ?)");
+            pstmt.setString(1, user.getLogin());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setDate(3, new Date(user.getCreateDate().getTime()));
+            int rowCount = pstmt.executeUpdate();
+
+            System.out.println(rowCount);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public User getUserById(Integer id) {
-        return users.stream().filter(item -> item.getId().equals(id)).findFirst().get();
+    public User getUserById(int id) {
+
+        User user = null;
+        try {
+            PreparedStatement pstmt = connect.prepareStatement("SELECT id, login, password, createDate FROM user WHERE id = ?");
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt(1));
+                user.setLogin(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                user.setCreateDate(rs.getDate(4));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
-    public void updateUser(User oldUser, User newUser) {
-        users.set(users.indexOf(oldUser), newUser);
+    public void updateUser(int id, User user) {
+
+        try {
+            PreparedStatement pstmt = connect.prepareStatement("UPDATE user SET login = ?, password = ?, createDate = ? WHERE id = ?");
+            pstmt.setString(1, user.getLogin());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setDate(3, (Date) user.getCreateDate());
+            pstmt.setInt(4, id);
+
+            int rowCount = pstmt.executeUpdate();
+
+            System.out.println(rowCount);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void deleteUser(User user) {
-        users.remove(users.indexOf(user));
-    }
+//    public void deleteUser(User user) {
+//        users.remove(users.indexOf(user));
+//    }
+//
+//    public List<User> getAllUsers() {
+//        return users;
+//    }
 
-    public List<User> getAllUsers() {
-        return users;
-    }
 }
 
