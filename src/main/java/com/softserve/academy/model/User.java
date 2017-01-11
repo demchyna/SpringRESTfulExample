@@ -41,8 +41,4 @@ public class User {
     public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
     }
-
-    public void setCreateDate() {
-        this.createDate = new Timestamp(new Date().getTime());
-    }
 }

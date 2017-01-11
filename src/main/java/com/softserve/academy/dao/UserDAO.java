@@ -20,9 +20,7 @@ public class UserDAO {
             pstmt.setString(1, user.getLogin());
             pstmt.setString(2, user.getPassword());
             pstmt.setTimestamp(3, new Timestamp(user.getCreateDate().getTime()));
-            int rowCount = pstmt.executeUpdate();
-
-            System.out.println(rowCount);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,13 +30,14 @@ public class UserDAO {
     public User getUserById(int id) {
 
         User user = null;
+
         try {
             PreparedStatement pstmt = connect.prepareStatement("SELECT id, login, password, createDate FROM user WHERE id = ?");
             pstmt.setInt(1, id);
 
             ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 user = new User();
                 user.setId(rs.getInt(1));
                 user.setLogin(rs.getString(2));
@@ -60,44 +59,38 @@ public class UserDAO {
             pstmt.setString(2, user.getPassword());
             pstmt.setTimestamp(3, user.getCreateDate());
             pstmt.setInt(4, id);
-
-            int rowCount = pstmt.executeUpdate();
-
-            System.out.println(rowCount);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteUser(int id) {
+    public int deleteUser(int id) {
+
+        int rowCount = 0;
 
         try {
             PreparedStatement pstmt = connect.prepareStatement("DELETE FROM user WHERE id = ?");
             pstmt.setInt(1, id);
-
-            int rowCount = pstmt.executeUpdate();
-
-            System.out.println(rowCount);
+            rowCount = pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return rowCount;
     }
 
     public List<User> getAllUsers() {
 
         List<User> users = null;
-        User user = null;
+        User user;
 
         try {
             PreparedStatement pstmt = connect.prepareStatement("SELECT id, login, password, createDate FROM user");
             ResultSet rs = pstmt.executeQuery();
 
-            if (!rs.wasNull()) {
-                users = new ArrayList<>();
-            }
+            users = new ArrayList<>();
 
             while (rs.next()) {
                 user = new User();
@@ -114,4 +107,3 @@ public class UserDAO {
         return users;
     }
 }
-

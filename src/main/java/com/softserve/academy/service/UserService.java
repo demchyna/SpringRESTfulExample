@@ -20,21 +20,27 @@ public class UserService {
         userDAO.addUser(user);
     }
 
-    public User getUserById(Integer id) {
-        return userDAO.getUserById(id);
+    public User getUserById(int id) {
+        User user = userDAO.getUserById(id);
+        if (user != null) {
+            return user;
+        } else {
+            throw new RuntimeException("Resource not found");
+        }
     }
 
     public void updateUser(int id, User newUser) {
         User oldUser = userDAO.getUserById(id);
         if (oldUser != null) {
+            newUser.setCreateDate(oldUser.getCreateDate());
             userDAO.updateUser(id, newUser);
         }
     }
 
     public void deleteUser(int id) {
-        User user = getUserById(id);
-        if (user != null) {
-            userDAO.deleteUser(id);
+        int rowCount = userDAO.deleteUser(id);
+        if (rowCount == 0) {
+            throw new RuntimeException("Resource not found");
         }
     }
 
@@ -43,7 +49,7 @@ public class UserService {
         if (!users.isEmpty()) {
             return users;
         } else {
-            return null;
+            throw new RuntimeException("Resources not found");
         }
     }
 }
