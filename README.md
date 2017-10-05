@@ -6,7 +6,7 @@ Examples json`s for various types of requests
 > * Body:
 >```js
     {
-        "login": "admin",
+        "username": "admin",
         "password": "1111"
     }
 ```
@@ -22,7 +22,7 @@ Examples json`s for various types of requests
 >```js
     {
         "id": 1,
-        "login": "mike",
+        "username": "mike",
         "password": "2222",
     }
 ```
