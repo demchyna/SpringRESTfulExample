@@ -9,7 +9,7 @@ Examples json`s for various types of requests
         "login": "admin",
         "password": "1111"
     }
-```
+>```
 
 ### 2. Get User by ID:
 > * Method: **GET**
@@ -25,7 +25,7 @@ Examples json`s for various types of requests
         "login": "mike",
         "password": "2222",
     }
-```
+>```
 
 ### 4. Delete existing User:
 > * Method: **DELETE**
