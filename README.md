@@ -4,12 +4,12 @@ Examples json`s for various types of requests
 > * Method: **POST**
 > * URL: **http://localhost:8080/user/add**
 > * Body:
->```js
+js
     {
         "login": "admin",
         "password": "1111"
     }
->```
+
 
 ### 2. Get User by ID:
 > * Method: **GET**
